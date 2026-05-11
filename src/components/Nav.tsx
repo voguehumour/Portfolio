@@ -57,7 +57,7 @@ export function Nav() {
           </Link>
 
           <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.02] px-2 py-2 backdrop-blur-md lg:flex">
-            {NAV.slice(1, 8).map((item) => {
+            {NAV.map((item) => {
               const active = pathname === item.href;
               return (
                 <Link
@@ -79,7 +79,7 @@ export function Nav() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/contact"
+              href="/#contact"
               data-cursor="link"
               data-cursor-label="Talk"
               className="hidden rounded-full border border-white/10 px-5 py-2.5 text-[11px] uppercase tracking-[0.28em] text-bone transition-colors hover:border-white/30 hover:bg-white/[0.04] md:inline-flex"

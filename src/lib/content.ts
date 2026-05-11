@@ -15,17 +15,127 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-  { href: "/", label: "Index", index: "00" },
-  { href: "/about", label: "About", index: "01" },
-  { href: "/projects", label: "Projects", index: "02" },
-  { href: "/services", label: "Services", index: "03" },
-  { href: "/process", label: "Process", index: "04" },
-  { href: "/ai-lab", label: "AI Lab", index: "05" },
-  { href: "/experience", label: "Experience", index: "06" },
-  { href: "/testimonials", label: "Testimonials", index: "07" },
-  { href: "/blog", label: "Insights", index: "08" },
-  { href: "/contact", label: "Contact", index: "09" },
+  { href: "/#work", label: "Work", index: "01" },
+  { href: "/#about", label: "About", index: "02" },
+  { href: "/#services", label: "Services", index: "03" },
+  { href: "/#lab", label: "Lab", index: "04" },
+  { href: "/#contact", label: "Contact", index: "05" },
 ];
+
+// ============ MASTER PROMPT CONTENT ============
+// Single-page portfolio content for AI Consultant × Product Designer
+
+export const HERO_ROLES = [
+  "AI Consultant",
+  "Product Designer",
+  "Design Strategist",
+  "AI-Native Thinker",
+];
+
+export const ABOUT_STATS = [
+  { value: 4, suffix: "+", label: "Years in AI × Design" },
+  { value: 30, suffix: "+", label: "Products shipped" },
+  { value: 15, suffix: "+", label: "AI systems designed" },
+];
+
+export const ABOUT_PARAGRAPHS = [
+  { text: "I don't just build AI tools. I design how people experience intelligence.", emphasis: true },
+  { text: "Most AI products fail not because the model is wrong — but because the interface assumes too much.", emphasis: false },
+  { text: "I work at the seam: translating model capabilities into intuitions, flows, and moments of genuine delight.", emphasis: false },
+];
+
+export const MASTER_SERVICES = [
+  {
+    id: "ai-product-strategy",
+    title: "AI Product Strategy",
+    desc: "From prototype to roadmap — I help teams decide what to build, in what order, and why.",
+    icon: "strategy",
+  },
+  {
+    id: "ux-for-ai",
+    title: "UX for AI Systems",
+    desc: "Designing conversation flows, AI disclosure patterns, error states, and trust UX for LLM products.",
+    icon: "conversation",
+  },
+  {
+    id: "design-systems",
+    title: "Design Systems",
+    desc: "Building scalable component libraries that encode your AI product's interaction language.",
+    icon: "atomic",
+  },
+  {
+    id: "ai-consulting",
+    title: "AI Consulting",
+    desc: "Advising founders and product teams on model selection, prompt architecture, and AI roadmaps.",
+    icon: "layers",
+  },
+] as const;
+
+export const MASTER_PROJECTS = [
+  {
+    id: "aria",
+    title: "Aria — Conversational AI Design System",
+    tags: ["Product Design", "LLM"],
+    desc: "End-to-end design system for a customer support AI. 12 reusable conversation components, trust indicators, and fallback UX patterns.",
+    metrics: ["3.2× CSAT improvement", "40% fewer escalations"],
+    visual: "chat",
+  },
+  {
+    id: "neuralnav",
+    title: "NeuralNav — AI Roadmap Tool",
+    tags: ["AI Consulting", "Strategy"],
+    desc: "Helped a Series B SaaS company design their AI feature rollout strategy, from RAG implementation to UI disclosure.",
+    metrics: ["Shipped in 6 weeks", "Used by 8,000+ teams"],
+    visual: "flow",
+  },
+  {
+    id: "prism",
+    title: "Prism — Multimodal UX Framework",
+    tags: ["Research", "Design"],
+    desc: "Pioneered interaction patterns for vision+language models — how users upload, annotate, and interpret AI-analyzed images.",
+    metrics: ["Presented at Config 2024", "Open sourced"],
+    visual: "grid",
+  },
+] as const;
+
+export const TECH_PILLS = [
+  { name: "Figma", featured: true },
+  { name: "Claude", featured: true },
+  { name: "GPT-4o", featured: true },
+  { name: "Next.js", featured: true },
+  { name: "LangChain" },
+  { name: "Framer" },
+  { name: "Tailwind" },
+  { name: "Supabase" },
+  { name: "Vercel" },
+  { name: "Midjourney" },
+  { name: "Cursor" },
+  { name: "Notion" },
+  { name: "RAG" },
+  { name: "Anthropic SDK" },
+  { name: "OpenAI" },
+  { name: "Three.js" },
+] as const;
+
+export const PROCESS_STEPS = [
+  { num: "01", title: "Discover", desc: "AI audit, stakeholder interviews, capability mapping. We start by understanding what your models can do — and where they break." },
+  { num: "02", title: "Define", desc: "Problem framing, UX principles for AI, success metrics. Crisp definitions become the contract for everything we ship." },
+  { num: "03", title: "Design", desc: "Rapid prototyping, interaction patterns, component architecture. Tested in front of real users — not stakeholders." },
+  { num: "04", title: "Deploy", desc: "Handoff, QA, design system docs, post-launch iteration. The first launch is a hypothesis — we keep refining together." },
+] as const;
+
+export const MASTER_TESTIMONIALS = [
+  { quote: "Animesh thinks in systems. He didn't just redesign our AI — he redesigned how our team thinks about AI.", author: "Priya R.", role: "Head of Product, TechCorp" },
+  { quote: "Rare combination of deep AI knowledge and UX craft. Our onboarding drop-off fell 58% after his sprint.", author: "Marcus L.", role: "Founder, Startup X" },
+  { quote: "He asked questions no designer had ever asked us before. The result felt inevitable.", author: "Sunita K.", role: "CPO, Enterprise Co." },
+] as const;
+
+export const LAB_ITEMS = [
+  { title: "AI Haiku Generator", tag: "Experiment", desc: "A poetic interface for GPT-4o — three-line distillations of any prompt." },
+  { title: "Prompt Grader", tag: "Tool", desc: "Scores and improves your prompts in real-time using a constitution of best practices." },
+  { title: "DesignGPT Templates", tag: "Resource", desc: "100+ Figma prompts for AI product designers — free and open." },
+  { title: "AJ Notes", tag: "Writing", desc: "My public brain dump on AI × Design — short essays, every week." },
+] as const;
 
 export const STATS = [
   { value: 9, suffix: "+", label: "Years Crafting Experiences" },
