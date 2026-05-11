@@ -23,8 +23,7 @@ export const NAV = [
   { href: "/experience", label: "Experience", index: "06" },
   { href: "/testimonials", label: "Testimonials", index: "07" },
   { href: "/blog", label: "Insights", index: "08" },
-  { href: "/skills", label: "Skills", index: "09" },
-  { href: "/contact", label: "Contact", index: "10" },
+  { href: "/contact", label: "Contact", index: "09" },
 ];
 
 export const STATS = [

@@ -3,6 +3,7 @@ import { SERVICES } from "@/lib/content";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
+import { SkillsPileSection } from "@/components/sections/SkillsPileSection";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -56,7 +57,14 @@ export default function ServicesPage() {
             ))}
           </ul>
 
-          <div className="mt-24 grid items-end gap-12 lg:grid-cols-[1.4fr_1fr]">
+        </div>
+      </section>
+
+      <SkillsPileSection />
+
+      <section className="relative bg-ink-950 py-24 sm:py-32">
+        <div className="mx-auto max-w-[1600px] px-6 sm:px-10">
+          <div className="grid items-end gap-12 lg:grid-cols-[1.4fr_1fr]">
             <h2 className="font-display text-display-2 leading-[0.95] tracking-tight">
               Not sure what fits? <span className="italic text-bone/60">Let's scope it together.</span>
             </h2>
