@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SITE } from "@/lib/content";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { RouteTransition } from "@/components/providers/RouteTransition";
 import { Cursor } from "@/components/ui/Cursor";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -65,7 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll>
           <Cursor />
           <Nav />
-          <main>{children}</main>
+          <RouteTransition>
+            <main>{children}</main>
+          </RouteTransition>
           <Footer />
         </SmoothScroll>
       </body>

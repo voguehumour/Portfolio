@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { POSTS } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
@@ -57,15 +58,23 @@ export default function BlogPage() {
             className="group relative block overflow-hidden rounded-2xl border border-white/[0.06] bg-ink-900"
             style={{ aspectRatio: "16/8" }}
           >
+            <Image
+              src={featured.cover}
+              alt={featured.title}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+            />
             <div
-              className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105"
+              className="absolute inset-0 mix-blend-multiply"
               style={{
                 background:
-                  "radial-gradient(60% 60% at 30% 30%, rgba(91,140,255,0.4), transparent 60%), radial-gradient(40% 60% at 80% 70%, rgba(155,135,255,0.35), transparent 60%), linear-gradient(180deg, #0a0a0d 0%, #15161c 100%)",
+                  "radial-gradient(60% 60% at 30% 30%, rgba(91,140,255,0.3), transparent 60%), radial-gradient(40% 60% at 80% 70%, rgba(155,135,255,0.25), transparent 60%), linear-gradient(180deg, rgba(5,5,7,0.4) 0%, rgba(5,5,7,0.85) 100%)",
               }}
             />
             <div className="grain absolute inset-0 opacity-30" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent" />
             <div className="relative z-10 flex h-full flex-col justify-between p-10 sm:p-14">
               <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-graphite-200">
                 Featured · {featured.category} · {featured.read}

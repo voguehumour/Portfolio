@@ -1,11 +1,13 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { EffectComposer, Bloom, ChromaticAberration, Vignette, Noise } from "@react-three/postprocessing";
+import { BlendFunction, KernelSize } from "postprocessing";
 import { useMemo, useRef, Suspense } from "react";
 import * as THREE from "three";
 
-const NODE_COUNT = 220;
-const MAX_LINK_DIST = 1.4;
+const NODE_COUNT = 320;
+const MAX_LINK_DIST = 1.55;
 
 function Nodes() {
   const points = useRef<THREE.Points>(null);
@@ -96,7 +98,7 @@ function Nodes() {
       const yi = data.positions[ix + 1];
       const zi = data.positions[ix + 2];
       // limit fan-out for perf
-      for (let j = i + 1; j < Math.min(i + 18, NODE_COUNT); j++) {
+      for (let j = i + 1; j < Math.min(i + 14, NODE_COUNT); j++) {
         const jx = j * 3;
         const dx = xi - data.positions[jx];
         const dy = yi - data.positions[jx + 1];
@@ -227,7 +229,7 @@ export function NeuralField({ className = "" }: { className?: string }) {
     <div className={`absolute inset-0 ${className}`}>
       <Canvas
         camera={{ position: [0, 0, 6.5], fov: 55 }}
-        dpr={[1, 1.6]}
+        dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
         <color attach="background" args={["#050507"]} />
@@ -236,6 +238,23 @@ export function NeuralField({ className = "" }: { className?: string }) {
         <Suspense fallback={null}>
           <Nodes />
           <HoloIcosa />
+          <EffectComposer multisampling={0} enableNormalPass={false}>
+            <Bloom
+              intensity={0.9}
+              luminanceThreshold={0.18}
+              luminanceSmoothing={0.7}
+              kernelSize={KernelSize.LARGE}
+              mipmapBlur
+            />
+            <ChromaticAberration
+              blendFunction={BlendFunction.NORMAL}
+              offset={new THREE.Vector2(0.0011, 0.0011)}
+              radialModulation={false}
+              modulationOffset={0}
+            />
+            <Vignette eskil={false} offset={0.2} darkness={0.85} />
+            <Noise opacity={0.04} premultiply blendFunction={BlendFunction.ADD} />
+          </EffectComposer>
         </Suspense>
       </Canvas>
     </div>

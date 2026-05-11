@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { AI_LAB } from "@/lib/content";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
@@ -45,16 +46,22 @@ export default function AILabPage() {
                   data-cursor-label="Preview"
                   className={`group relative h-full w-full overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-br ${item.hue}`}
                 >
-                  <div className="absolute inset-0 bg-ink-900 mix-blend-multiply" />
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                  />
                   <div
-                    className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
+                    className="absolute inset-0 mix-blend-multiply"
                     style={{
                       background:
                         i % 3 === 0
-                          ? "radial-gradient(60% 60% at 30% 30%, rgba(91,140,255,0.45), transparent 60%), radial-gradient(40% 40% at 70% 70%, rgba(155,135,255,0.35), transparent 60%)"
+                          ? "radial-gradient(60% 60% at 30% 30%, rgba(91,140,255,0.45), transparent 60%), radial-gradient(40% 40% at 70% 70%, rgba(155,135,255,0.35), transparent 60%), linear-gradient(180deg, rgba(5,5,7,0.5), rgba(5,5,7,0.7))"
                           : i % 3 === 1
-                            ? "conic-gradient(from 90deg at 50% 50%, rgba(91,140,255,0.4), rgba(155,135,255,0.2), rgba(91,140,255,0.4))"
-                            : "linear-gradient(140deg, rgba(91,140,255,0.3) 0%, transparent 60%), radial-gradient(at 80% 20%, rgba(155,135,255,0.4), transparent 50%)",
+                            ? "conic-gradient(from 90deg at 50% 50%, rgba(91,140,255,0.4), rgba(155,135,255,0.2), rgba(91,140,255,0.4)), linear-gradient(180deg, rgba(5,5,7,0.4), rgba(5,5,7,0.7))"
+                            : "linear-gradient(140deg, rgba(91,140,255,0.3) 0%, transparent 60%), radial-gradient(at 80% 20%, rgba(155,135,255,0.4), transparent 50%), linear-gradient(180deg, rgba(5,5,7,0.4), rgba(5,5,7,0.7))",
                     }}
                   />
                   <div className="grain absolute inset-0 opacity-40" />

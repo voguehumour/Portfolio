@@ -16,12 +16,33 @@ const BUDGETS = ["< $15k", "$15k — $40k", "$40k — $100k", "$100k+"];
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: SUBJECTS[0], budget: BUDGETS[1], message: "" });
   const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const onChange = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setStatus("sending");
+    setErrorMsg(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = (await res.json()) as { ok: boolean; error?: string };
+      if (!res.ok || !data.ok) {
+        setStatus("error");
+        setErrorMsg(data.error || "Something refracted. Try again.");
+        return;
+      }
+      setSent(true);
+      setStatus("idle");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Try again.");
+    }
   };
 
   return (
@@ -77,35 +98,32 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="mt-12 glass rounded-2xl p-6">
-              <div className="flex items-center justify-between">
+            <div className="mt-12 glass overflow-hidden rounded-2xl">
+              <div className="flex items-center justify-between p-6">
                 <div>
                   <div className="text-[10px] uppercase tracking-[0.28em] text-graphite-200">Calendar</div>
                   <div className="mt-2 font-display text-2xl tracking-tight">Book a 30-minute intro</div>
                 </div>
                 <Magnetic strength={0.3}>
                   <a
-                    href="#"
+                    href={`https://cal.com/${SITE.calcom}`}
+                    target="_blank"
+                    rel="noreferrer"
                     data-cursor="link"
                     className="inline-block rounded-full bg-bone px-6 py-3 text-[11px] uppercase tracking-[0.28em] text-ink-950"
                   >
-                    Open Cal
+                    Open Cal ↗
                   </a>
                 </Magnetic>
               </div>
-              <div className="mt-6 grid grid-cols-4 gap-2 text-center text-[10px] uppercase tracking-[0.24em]">
-                {["Mon", "Tue", "Wed", "Thu"].map((d, i) => (
-                  <button
-                    key={d}
-                    data-cursor="link"
-                    className={`rounded-lg border border-white/10 px-2 py-3 transition-colors ${
-                      i === 1 ? "bg-electric/20 text-bone" : "text-graphite-100 hover:bg-white/[0.04]"
-                    }`}
-                  >
-                    <div className="text-bone">{d}</div>
-                    <div className="mt-1 text-bone/60">10 + 14 + 16h</div>
-                  </button>
-                ))}
+              <div className="relative h-[420px] w-full border-t border-white/[0.06]">
+                <iframe
+                  title="Book a call"
+                  src={`https://cal.com/${SITE.calcom}?embed=true&theme=dark&hideEventTypeDetails=false`}
+                  className="absolute inset-0 h-full w-full"
+                  style={{ colorScheme: "dark" }}
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
@@ -201,15 +219,16 @@ export default function ContactPage() {
 
                 <div className="mt-10 flex items-center justify-between">
                   <div className="text-[10px] uppercase tracking-[0.28em] text-graphite-200">
-                    Response in 48h
+                    {errorMsg ? <span className="text-violet-mist">{errorMsg}</span> : "Response in 48h"}
                   </div>
                   <Magnetic strength={0.3}>
                     <button
                       type="submit"
+                      disabled={status === "sending"}
                       data-cursor="link"
-                      className="group inline-flex items-center gap-3 rounded-full bg-bone px-8 py-4 text-[12px] uppercase tracking-[0.28em] text-ink-950 transition-transform"
+                      className="group inline-flex items-center gap-3 rounded-full bg-bone px-8 py-4 text-[12px] uppercase tracking-[0.28em] text-ink-950 transition-transform disabled:opacity-60"
                     >
-                      Send transmission
+                      {status === "sending" ? "Transmitting…" : "Send transmission"}
                       <span className="h-1.5 w-1.5 animate-pulse-glow rounded-full bg-electric" />
                     </button>
                   </Magnetic>

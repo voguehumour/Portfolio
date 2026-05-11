@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { PROJECTS } from "@/lib/content";
 import { PageHeader } from "@/components/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
@@ -60,10 +61,17 @@ export default function ProjectsPage() {
                   }`}
                   style={{ aspectRatio: i % 3 === 0 ? "16/9" : "4/3" }}
                 >
+                  <Image
+                    src={p.cover}
+                    alt={p.title}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                  />
                   <div
-                    className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                    className="absolute inset-0 mix-blend-multiply"
                     style={{
-                      background: `linear-gradient(135deg, ${p.accent}33 0%, transparent 55%), radial-gradient(60% 80% at 50% 0%, ${p.accent}22, transparent 60%), linear-gradient(180deg, #0a0a0d 0%, #15161c 100%)`,
+                      background: `linear-gradient(135deg, ${p.accent}55 0%, transparent 55%), linear-gradient(180deg, rgba(10,10,13,0.4) 0%, rgba(21,22,28,0.85) 100%)`,
                     }}
                   />
                   <div className="grain absolute inset-0 opacity-30" />

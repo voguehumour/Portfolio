@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -85,17 +86,26 @@ export function ProjectsShowcase() {
                   className="pj-bar col-span-12 mt-6 h-px w-full origin-left bg-gradient-to-r from-transparent via-electric/50 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 />
                 {/* hover preview tile */}
-                <div className="pointer-events-none absolute right-10 top-1/2 hidden h-44 w-72 -translate-y-1/2 overflow-hidden rounded-xl border border-white/10 opacity-0 transition-all duration-500 group-hover:opacity-100 md:block"
-                  style={{
-                    background: `linear-gradient(135deg, ${p.accent}33 0%, transparent 50%), linear-gradient(45deg, #0a0a0d 0%, #15161c 100%)`,
-                  }}
-                >
-                  <div className="grain absolute inset-0 opacity-40" />
+                <div className="pointer-events-none absolute right-10 top-1/2 hidden h-44 w-72 -translate-y-1/2 overflow-hidden rounded-xl border border-white/10 opacity-0 transition-all duration-500 group-hover:opacity-100 md:block">
+                  <Image
+                    src={p.cover}
+                    alt={p.title}
+                    fill
+                    sizes="288px"
+                    className="object-cover"
+                  />
+                  <div
+                    className="absolute inset-0 mix-blend-multiply"
+                    style={{
+                      background: `linear-gradient(135deg, ${p.accent}55 0%, transparent 60%), linear-gradient(180deg, rgba(5,5,7,0.3) 0%, rgba(5,5,7,0.7) 100%)`,
+                    }}
+                  />
+                  <div className="grain absolute inset-0 opacity-30" />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] uppercase tracking-[0.28em] text-bone/80">
                     <span>{p.client}</span>
                     <span>{p.year}</span>
                   </div>
-                  <div className="absolute left-3 top-3 grid h-7 w-7 place-items-center rounded-full border border-white/20">
+                  <div className="absolute left-3 top-3 grid h-7 w-7 place-items-center rounded-full border border-white/20 bg-ink-950/70 backdrop-blur">
                     <span className="h-1.5 w-1.5 rounded-full" style={{ background: p.accent }} />
                   </div>
                 </div>
